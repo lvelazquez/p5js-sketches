@@ -3,10 +3,17 @@
 // map a texture
 // unite points with a arcs and random glitchy shapes
 
+
 function setup() {
+
+    s = 0;
+    totalX = 0;
+    totalY = 0;
+
     createCanvas(900, 900, WEBGL);
     mic = new p5.AudioIn();
     mic.start();
+
     fft = new p5.FFT();
     fft.setInput(mic);
     peakDetect = new p5.PeakDetect(20, 2000, 0.2);
@@ -14,9 +21,6 @@ function setup() {
         bgColor = random(255);
         strokeColor = abs(bgColor - 255);
     });
-    s = 0;
-    totalX = 0;
-    totalY = 0;
 }
 
 function draw() {
