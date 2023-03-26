@@ -10,4 +10,7 @@ const colorSchemes = {
     "#ffe436",
     "#57a75a",
   ],
+  bright: [
+    "#C31717", "#E59315", "#D5EA2B", "#10A11A", "#1995D2"
+  ]
 };
