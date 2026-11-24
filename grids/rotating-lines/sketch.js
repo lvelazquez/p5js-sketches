@@ -1,82 +1,74 @@
+const GRID_SNAP = 10; // grid area is rounded to a multiple of this
+const GRID_FILL = 0.95; // fraction of the canvas used by the grid
+const STROKE_WEIGHT = 3;
+const MAX_CELLS_PER_SIDE = 2; // reached with the pointer at a canvas corner
+const SPIN_RANGE = [0.1, 1]; // initial angle, radians
+const SPIN_ACCELERATION_RANGE = [0.005, 0.01]; // rad/frame^2
 
-let a = [];
-let angle = 0;
+let spokes = [];
+let gridDim;
+let cellSize;
+let gridNum;
+let prevGridNum;
+let maxDist;
+const scheme = Palette.bright;
 
-function getDynDim() {
-  return round(round(width * 0.95) / 10) * 10;
+function gridDimension() {
+  return round(round(width * GRID_FILL) / GRID_SNAP) * GRID_SNAP;
 }
 
-let lineSize = 125;
-let cellNum = 3;
-
-function windowResized() {
-  const size = Math.min(windowWidth, windowHeight);
-  resizeCanvas(size, size);
+function measure() {
+  maxDist = dist(width / 2, height / 2, width, height);
+  gridDim = gridDimension();
 }
 
 function setup() {
-  maxDist = dist(width / 2, height / 2, width, height);
-  const size = Math.min(windowWidth, windowHeight);
-  createCanvas(size, size);
-  a = [];
-  dim = getDynDim();
-  colorScheme = colorSchemes.bright;
-  cellSize = dim / cellNum;
+  createCanvas(Kit.size(), Kit.size());
+  noFill();
+  strokeWeight(STROKE_WEIGHT);
+  measure();
+  gridNum = prevGridNum = 0;
+  Kit.init();
+}
 
-  gridNum = round(dim / cellSize);
-  prevGridNum = gridNum;
+function windowResized() {
+  resizeCanvas(Kit.size(), Kit.size());
+  measure();
+  prevGridNum = 0; // force the spokes to rebuild
 }
 
 function draw() {
-  noCursor();
-  background(70);
-  strokeWeight(3);
+  background(Palette.slate);
   const d = dist(width / 2, height / 2, mouseX, mouseY);
-  cellNum = round((d / maxDist) * 2);
-  cellSize = dim / cellNum;
-  lineSize = cellSize;
-  dim = getDynDim();
-  gridNum = round(dim / cellSize);
+  // At least 1 cell: 0 would make cellSize infinite and blank the canvas.
+  const cellsPerSide = max(1, round((d / maxDist) * MAX_CELLS_PER_SIDE));
+  cellSize = gridDim / cellsPerSide;
+  gridNum = round(gridDim / cellSize);
 
-  if (gridNum != prevGridNum) {
-    for (let i = 0; i < gridNum; i++) {
-      a[i] = []
-      for (let j = 0; j < gridNum; j++) {
-        a[i][j] = ({
-          num: random(2, 8),
-          color: colorScheme[floor(random(colorScheme.length))],
-          angle: random(0.1, 1),
-          angleVelocity: 0,
-          angleAcceleration: random(0.005, 0.01),
-        });
-      }
-    }
+  if (gridNum !== prevGridNum) {
+    spokes = Array.from({ length: gridNum }, () =>
+      Array.from({ length: gridNum }, () => ({
+        color: random(scheme),
+        angle: random(...SPIN_RANGE),
+        angleVelocity: 0,
+        angleAcceleration: random(...SPIN_ACCELERATION_RANGE),
+      }))
+    );
+    prevGridNum = gridNum;
   }
 
-  translate((width / 2) - (dim / 2), (height / 2) - (dim / 2));
-  noFill();
+  translate((width - gridDim) / 2, (height - gridDim) / 2);
   for (let i = 0; i < gridNum; i++) {
     for (let j = 0; j < gridNum; j++) {
-
-      a[i][j].angleVelocity += a[i][j].angleAcceleration;
-      a[i][j].angle += a[i][j].angleVelocity;
-
-      stroke(a[i][j].color);
+      const s = spokes[i][j];
+      s.angleVelocity += s.angleAcceleration;
+      s.angle += s.angleVelocity;
+      stroke(s.color);
       push();
       translate(i * cellSize + cellSize / 2, j * cellSize + cellSize / 2);
-      rotate(a[i][j].angle);
-      for (let i = 1; i <= a[i][j].num; i++) {
-        line(
-          -lineSize / 2,
-          0,
-          lineSize / 2,
-          0
-        );
-      }
-
+      rotate(s.angle);
+      line(-cellSize / 2, 0, cellSize / 2, 0);
       pop();
     }
   }
-
-  prevGridNum = gridNum;
 }

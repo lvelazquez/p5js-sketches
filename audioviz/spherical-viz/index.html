@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../common/style.css">
+  <head>
     <meta charset="utf-8" />
-</head>
-
-<body>
-    <main>
-    </main>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spherical viz</title>
+    <meta name="description" content="A rotating sphere of points whose size and density follow the bass, low-mid and treble of your microphone. A demo signal plays until you start the microphone." />
+    <meta name="sketch:audio" content="microphone" />
+    <link rel="stylesheet" href="../../common/style.css" />
+    <script src="../../vendor/p5.min.js"></script>
+    <script src="../../vendor/p5.sound.min.js"></script>
+    <script src="../../common/palette.js"></script>
     <script src="../../common/ease.js"></script>
-    <script src="../../common/colors.js"></script>
+    <script src="../../common/sketch-kit.js"></script>
+  </head>
+  <body>
+    <h1 class="visually-hidden">Spherical viz</h1>
+    <main></main>
     <script src="sketch.js"></script>
-</body>
-
+  </body>
 </html>
