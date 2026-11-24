@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>p5.js sketches</title>
+    <meta name="description" content="A gallery of generative p5.js sketches." />
+    <style>
+      :root {
+        --color-ground: #fafafa;
+        --color-text: #1a1a1a;
+        --color-muted: #555;
+        --color-card: #fff;
+        --color-border: #d4d4d4;
+        --color-accent: #0b5cad;
+        --color-focus: #0b5cad;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 16px;
+        --space-4: 24px;
+        --radius: 8px;
+        --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+        --card-min: 240px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-ground: #121212;
+          --color-text: #f0f0f0;
+          --color-muted: #b0b0b0;
+          --color-card: #1c1c1c;
+          --color-border: #3a3a3a;
+          --color-accent: #7ab7ff;
+          --color-focus: #ffd92f;
+        }
+      }
+      body { margin: 0; background: var(--color-ground); color: var(--color-text); font-family: var(--font); line-height: 1.45; }
+      header, main { max-width: 1200px; margin: 0 auto; padding: var(--space-4) var(--space-3); }
+      header { padding-bottom: 0; }
+      h1 { margin: 0 0 var(--space-2); }
+      h2 { margin: var(--space-4) 0 var(--space-3); }
+      p { color: var(--color-muted); margin: 0; }
+      .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr)); }
+      .card a { display: block; height: 100%; color: inherit; text-decoration: none; background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
+      .card a:hover { border-color: var(--color-accent); }
+      .card a:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+      .card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; background: var(--color-border); }
+      .card-body { display: block; padding: var(--space-3); }
+      .card-title { display: block; font-weight: 600; }
+      .card-desc { display: block; color: var(--color-muted); font-size: 0.9rem; margin-top: var(--space-1); }
+      .badge { font-size: 0.75rem; font-weight: 500; border: 1px solid var(--color-border); border-radius: 999px; padding: 0 var(--space-2); margin-left: var(--space-1); color: var(--color-muted); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>p5.js sketches</h1>
+      <p>Generative sketches. Every sketch pauses with Space and starts paused if your system asks for reduced motion.</p>
+    </header>
+    <main>
+    <section aria-labelledby="cat-audioviz">
+      <h2 id="cat-audioviz">Audioviz</h2>
+      <ul class="grid">
+        <li class="card">
+          <a href="audioviz/spherical-viz/">
+            <img src="thumbs/audioviz-spherical-viz.jpg" width="480" height="480" loading="lazy" alt="Preview of the Spherical viz sketch" />
+            <span class="card-body">
+              <span class="card-title">Spherical viz <span class="badge">microphone</span></span>
+              <span class="card-desc">A rotating sphere of points whose size and density follow the bass, low-mid and treble of your microphone. A demo signal plays until you start the microphone.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section aria-labelledby="cat-grids">
+      <h2 id="cat-grids">Grids</h2>
+      <ul class="grid">
+        <li class="card">
+          <a href="grids/rand-paths/">
+            <img src="thumbs/grids-rand-paths.jpg" width="480" height="480" loading="lazy" alt="Preview of the Random grid paths sketch" />
+            <span class="card-body">
+              <span class="card-title">Random grid paths</span>
+              <span class="card-desc">Thirty random stair-step paths snap to a grid, draw themselves across the canvas, then retract and reroll.</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="grids/rotating-lines/">
+            <img src="thumbs/grids-rotating-lines.jpg" width="480" height="480" loading="lazy" alt="Preview of the Rotating lines sketch" />
+            <span class="card-body">
+              <span class="card-title">Rotating lines</span>
+              <span class="card-desc">A grid of spinning, accelerating lines. Move the pointer toward the edge of the canvas to change the grid density.</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="grids/sine-arcs/">
+            <img src="thumbs/grids-sine-arcs.jpg" width="480" height="480" loading="lazy" alt="Preview of the Sine arcs sketch" />
+            <span class="card-body">
+              <span class="card-title">Sine arcs</span>
+              <span class="card-desc">Nine rosettes of concentric arcs whose spread breathes on a sine wave and re-seeds its symmetry each cycle.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section aria-labelledby="cat-mandalas">
+      <h2 id="cat-mandalas">Mandalas</h2>
+      <ul class="grid">
+        <li class="card">
+          <a href="mandalas/arcs/">
+            <img src="thumbs/mandalas-arcs.jpg" width="480" height="480" loading="lazy" alt="Preview of the Morphing arcs sketch" />
+            <span class="card-body">
+              <span class="card-title">Morphing arcs</span>
+              <span class="card-desc">Ten translucent arcs rotate while their radius, weight and colour morph to new random targets.</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="mandalas/round-arcs/">
+            <img src="thumbs/mandalas-round-arcs.jpg" width="480" height="480" loading="lazy" alt="Preview of the Round arcs sketch" />
+            <span class="card-body">
+              <span class="card-title">Round arcs</span>
+              <span class="card-desc">Ten concentric arcs, each turning at its own slow speed, in a cool palette on black.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section aria-labelledby="cat-rand">
+      <h2 id="cat-rand">Rand</h2>
+      <ul class="grid">
+        <li class="card">
+          <a href="rand/crooked-quads-peak/">
+            <img src="thumbs/rand-crooked-quads-peak.jpg" width="480" height="480" loading="lazy" alt="Preview of the Crooked quads sketch" />
+            <span class="card-body">
+              <span class="card-title">Crooked quads <span class="badge">microphone</span></span>
+              <span class="card-desc">Three skewed quadrilaterals jump to new shapes and colours on every beat. Beats come from your microphone or a built-in demo pulse.</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="rand/rand-peaks/">
+            <img src="thumbs/rand-rand-peaks.jpg" width="480" height="480" loading="lazy" alt="Preview of the Random peaks sketch" />
+            <span class="card-body">
+              <span class="card-title">Random peaks</span>
+              <span class="card-desc">Ten jagged polylines draw themselves from left to right with an ease-out, hold, then redraw with new peaks.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    </main>
+  </body>
+</html>
