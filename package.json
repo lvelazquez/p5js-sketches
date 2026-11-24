@@ -1,0 +1,23 @@
+{
+  "name": "p5js-sketches",
+  "private": true,
+  "type": "module",
+  "description": "Generative p5.js sketches with a gallery index.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "gallery": "node tools/build-gallery.ts",
+    "dev": "npm run gallery && node tools/serve.ts",
+    "check": "node tools/check-sketches.ts",
+    "thumbs": "node tools/thumbs.ts",
+    "site": "node tools/build-site.ts",
+    "new": "node tools/new-sketch.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "playwright": "^1.55.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
